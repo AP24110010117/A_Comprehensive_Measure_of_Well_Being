@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Human Development Index Predictor</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+
+            background:url("{{ url_for('static', filename='world.jpg') }}");
+            background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
+
+            height:100vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+        }
+
+        .overlay{
+
+            width:100%;
+            height:100%;
+
+            background:rgba(0,0,0,.55);
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+        }
+
+        .container{
+
+            width:650px;
+
+            background:rgba(0,0,0,.80);
+
+            padding:40px;
+
+            border-radius:20px;
+
+            box-shadow:0px 0px 25px black;
+
+        }
+
+        h1{
+
+            color:red;
+
+            text-align:center;
+
+            margin-bottom:35px;
+
+            font-size:42px;
+
+        }
+
+        label{
+
+            color:white;
+
+            font-size:18px;
+
+            font-weight:bold;
+
+            display:block;
+
+            margin-top:15px;
+
+            margin-bottom:8px;
+
+        }
+
+        select,
+        input{
+
+            width:100%;
+
+            padding:15px;
+
+            border-radius:30px;
+
+            border:2px solid #27AEFF;
+
+            background:transparent;
+
+            color:white;
+
+            font-size:16px;
+
+            outline:none;
+
+        }
+
+        option{
+
+            color:black;
+
+        }
+
+        input::placeholder{
+
+            color:#ddd;
+
+        }
+
+        button{
+
+            width:100%;
+
+            margin-top:35px;
+
+            padding:16px;
+
+            border:none;
+
+            border-radius:35px;
+
+            font-size:22px;
+
+            font-weight:bold;
+
+            color:white;
+
+            cursor:pointer;
+
+            background:linear-gradient(to right,#36D1DC,#5B86E5);
+
+            transition:.3s;
+
+        }
+
+        button:hover{
+
+            transform:scale(1.03);
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="overlay">
+
+<div class="container">
+
+<h1>Human Development Index</h1>
+
+<form action="/predict" method="POST">
+
+<label>Select Country</label>
+
+<select name="country" required>
+
+<option value="">-- Select Country --</option>
+
+{% for country in countries %}
+
+<option value="{{ country }}">{{ country }}</option>
+
+{% endfor %}
+
+</select>
+
+<label>Life Expectancy at Birth (2021)</label>
+
+<input
+type="number"
+step="0.1"
+name="life"
+placeholder="Enter Life Expectancy"
+required>
+
+<label>Mean Years of Schooling (2021)</label>
+
+<input
+type="number"
+step="0.1"
+name="school"
+placeholder="Enter Mean Years of Schooling"
+required>
+
+<label>Gross National Income Per Capita (2021)</label>
+
+<input
+type="number"
+step="0.1"
+name="gni"
+placeholder="Enter GNI Per Capita"
+required>
+
+<button type="submit">
+
+Predict HDI
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
